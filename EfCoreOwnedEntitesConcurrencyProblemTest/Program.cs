@@ -1,4 +1,6 @@
-﻿namespace EfCoreOwnedEntitesConcurrencyProblemTest
+﻿using System.Linq;
+
+namespace EfCoreOwnedEntitesConcurrencyProblemTest
 {
     class Program
     {
@@ -12,6 +14,19 @@
                 context.Authors.AddRange(
                     new Author { Name = new Name { First = "Peter", Last = "Lustig" } },
                     new Author { Name = new Name { First = "Franz Xaver", Last = "Gruber" } });
+                context.SaveChanges();
+            }
+        }
+
+        private static void ConcurrencyProblem()
+        {
+            using (var context = new BookDbContext())
+            {
+                var author = context.Authors.First();
+                author.Name.First = "Lukas";
+                context.SaveChanges();
+
+                author.Description = "Some very important information";
                 context.SaveChanges();
             }
         }
