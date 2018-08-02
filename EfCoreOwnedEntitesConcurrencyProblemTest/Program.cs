@@ -29,7 +29,7 @@ namespace EfCoreOwnedEntitesConcurrencyProblemTest
                 context.SaveChanges();
 
                 author.Description = "Some very important information";
-                context.SaveChanges();
+                context.SaveChanges();      // -> DbUpdateConcurrencyException
             }
         }
     }
