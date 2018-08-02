@@ -16,6 +16,8 @@ namespace EfCoreOwnedEntitesConcurrencyProblemTest
                     new Author { Name = new Name { First = "Franz Xaver", Last = "Gruber" } });
                 context.SaveChanges();
             }
+
+            ConcurrencyProblem();
         }
 
         private static void ConcurrencyProblem()
